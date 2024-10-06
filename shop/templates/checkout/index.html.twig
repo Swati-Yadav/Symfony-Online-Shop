@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block body %}
+    <h1>Checkout</h1>
+
+    <h2>Your Cart</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.price }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td>{{ total }}</td>
+                </tr>
+        </tbody>
+    </table>
+
+    <h2>Your Details</h2>
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.customerName) }}
+            {{ form_widget(form.customerName, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.customerAddress) }}
+            {{ form_widget(form.customerAddress, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <button type="submit" class="btn btn-primary">Place Order</button>
+    {{ form_end(form) }}
+{% endblock %}
